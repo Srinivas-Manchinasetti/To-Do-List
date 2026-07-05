@@ -1,0 +1,312 @@
+/* ================================
+   CSS Reset & Base
+================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   CSS Variables (Cool Blue & Cyan)
+================================ */
+:root {
+  --bg-page:       #0a0e1a;
+  --bg-card:       #0d1526;
+  --bg-input:      #111d35;
+  --accent:        #00c8ff;
+  --accent-hover:  #00a8d6;
+  --text-primary:  #cfe8ff;
+  --text-muted:    #5a7fa8;
+  --text-done:     #2e4a6a;
+  --border:        #1a2f50;
+  --radius:        10px;
+  --transition:    0.2s ease;
+}
+
+/* ================================
+   Page Layout
+================================ */
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ✅ centered vertically */
+  padding: 48px 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: 0 8px 32px rgba(0, 200, 255, 0.08);
+}
+
+/* ================================
+   Header
+================================ */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #00c8ff;
+  text-shadow: 0 0 18px rgba(0, 200, 255, 0.4);
+}
+
+.task-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ================================
+   Input Area
+================================ */
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.input-area input::placeholder {
+  color: var(--text-muted);
+}
+
+.input-area input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 200, 255, 0.15);
+}
+
+.input-area button {
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #0a0e1a;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.input-area button:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.3);
+}
+
+/* ================================
+   Filter Tabs
+================================ */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.tab:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+.tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0e1a;
+  font-weight: 700;
+}
+
+/* ================================
+   Task List
+================================ */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+  animation: slideIn 0.2s ease;
+}
+
+.task-item:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(0, 200, 255, 0.1);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Checkbox */
+.task-item input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background var(--transition);
+  position: relative;
+}
+
+.task-item input[type="checkbox"]:checked {
+  background: var(--accent);
+}
+
+.task-item input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: #0a0e1a;
+  font-size: 12px;
+  font-weight: 700;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Task Text */
+.task-text {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  cursor: pointer;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: var(--text-done);
+}
+
+/* Inline Edit Input */
+.edit-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--accent);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  padding: 2px 0;
+}
+
+/* Action Buttons */
+.task-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.task-item:hover .task-actions {
+  opacity: 1;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background var(--transition);
+}
+
+.btn-edit { color: #00c8ff; }
+.btn-edit:hover { background: rgba(0, 200, 255, 0.15); }
+
+.btn-delete { color: #ff4d6d; }
+.btn-delete:hover { background: rgba(255, 77, 109, 0.15); }
+
+/* ================================
+   Empty State
+================================ */
+.empty-state {
+  display: none;
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ================================
+   Footer
+================================ */
+.app-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#clearDoneBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+#clearDoneBtn:hover {
+  color: var(--accent);
+}
+
+/* ================================
+   Responsive
+================================ */
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 16px;
+  }
+
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+}
