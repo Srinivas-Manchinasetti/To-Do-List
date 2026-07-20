@@ -28,7 +28,8 @@
    Page Layout
 ================================ */
 body {
-  background-color: var(--bg-page);
+  background: url("background1.jpg") no-repeat center center fixed;
+  background-size: cover;
   color: var(--text-primary);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
